@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More 'no_plan';
+use Test::More tests => 12;
 
 
 # deliberately don't import

@@ -3,11 +3,9 @@
 use warnings;
 use strict;
 
-use Test::More;
+use Test::More tests => 22;
 use Test::XML;
 use XML::Spice qw/ -x html body p ul li /;
-
-plan "no_plan";
 
 is_xml(html(), x("html"), "same output for 'html'");
 is_xml(body(), x("body"), "same output for 'body'");

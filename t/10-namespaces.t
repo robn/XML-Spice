@@ -3,11 +3,9 @@
 use warnings;
 use strict;
 
-use Test::More;
+use Test::More tests => 4;
 use Test::XML;
 use XML::Spice;
-
-plan "no_plan";
 
 my @tests = (
     "namespaces as attributes",

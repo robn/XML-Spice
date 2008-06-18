@@ -3,11 +3,9 @@
 use warnings;
 use strict;
 
-use Test::More;
+use Test::More tests => 3;
 use Test::XML;
 use XML::Spice;
-
-plan "no_plan";
 
 is_xml(
     qq(<tag>text</tag>),

@@ -3,11 +3,9 @@
 use warnings;
 use strict;
 
-use Test::More;
+use Test::More tests => 14;
 use Test::XML;
 use XML::Spice;
-
-plan "no_plan";
 
 my @tests = (
     "single tag",
