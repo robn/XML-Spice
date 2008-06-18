@@ -166,5 +166,5 @@ Robert Norris <rob@cataclysm.cx>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006 Robert Norris. This program is free software, you can
+Copyright (C) 2006-2008 Robert Norris. This program is free software, you can
 redistribute it and/or modify it under the same terms as Perl itself.
