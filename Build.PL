@@ -11,6 +11,7 @@ my $builder = Module::Build->new(
     },
     build_requires => {
         'Test::More' => 0,
+        'Test::XML' => 0,
     },
     add_to_cleanup      => [ 'XML-Spice-*' ],
 );

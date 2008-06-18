@@ -4,15 +4,10 @@ use warnings;
 use strict;
 
 use Test::More;
+use Test::XML;
 use XML::Spice qw/ -x html body p ul li /;
 
-eval "use Test::XML";
-if ($@) {
-    plan skip_all => "Test::XML required for coderef tests";
-}
-else {
-    plan "no_plan";
-}
+plan "no_plan";
 
 is_xml(html(), x("html"), "same output for 'html'");
 is_xml(body(), x("body"), "same output for 'body'");
