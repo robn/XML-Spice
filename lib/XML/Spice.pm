@@ -3,6 +3,8 @@ package XML::Spice;
 use warnings;
 use strict;
 
+use Carp;
+
 our $VERSION = "0.01";
 
 sub import {
@@ -23,6 +25,10 @@ sub import {
         elsif ($arg =~ m/^(\w+)=(\w+)$/) {
             $name = $1;
             $tag = $2;
+        }
+
+        else {
+            croak qq{Unknown option "$arg"};
         }
 
         if ($name && $tag) {
