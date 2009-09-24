@@ -10,40 +10,34 @@ sub import {
 
     my $them = caller();
 
-    my $want_x = "implied";
-    my $tags = 0;
-    my $name_x = "x";
+    my $want_x = 1;
 
     for my $arg (@args) {
-        my ($cmd, $opt) = $arg =~ m/^-(\w+)(?:=(\w+))?$/;
-        if (defined $cmd) {
-            if ($cmd eq "nox") {
-                $want_x = "none";
-                next;
-            }
+        my ($name, $tag);
 
-            if ($cmd eq "x") {
-                $name_x = $opt || "x";
-                $want_x = "explicit";
-                next;
-            }
-
-            next;
+        if ($arg =~ m/^(\w+)$/) {
+            $name = $1;
+            $tag = $name;
         }
 
-        next if ! $arg =~ m/[a-zA-Z]\w*/;
+        elsif ($arg =~ m/^(\w+)=(\w+)$/) {
+            $name = $1;
+            $tag = $2;
+        }
 
-        $tags = 1;
+        if ($name && $tag) {
+            $want_x = 0;
 
-        {
-            no strict "refs";
-            *{$them."::".$arg} = sub { x($arg, @_) };
+            {
+                no strict "refs";
+                *{$them."::".$name} = sub { x($tag, @_) };
+            }
         }
     }
 
-    if ($want_x eq "explicit" || ($want_x eq "implied" && !$tags)) {
+    if ($want_x) {
         no strict "refs";
-        *{$them."::".$name_x} = \&x;
+        *{$them."::x"} = \&x;
     }
 }
 
