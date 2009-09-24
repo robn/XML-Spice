@@ -5,7 +5,8 @@ use strict;
 
 use Test::More tests => 22;
 use Test::XML;
-use XML::Spice qw/ -x html body p ul li /;
+use XML::Spice qw( html body p ul li );
+import XML::Spice; # get x() as well
 
 is_xml(html(), x("html"), "same output for 'html'");
 is_xml(body(), x("body"), "same output for 'body'");
