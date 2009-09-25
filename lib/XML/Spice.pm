@@ -146,6 +146,8 @@ sub _xml {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 XML::Spice - makes generating XML taste great!
@@ -191,26 +193,28 @@ Instead of this, you could use XML::Spice and write the same thing in Perl:
 
 You'll can add liberal amounts of whitespace to convey structure without it
 making your output larger. You get Perl checking to make sure that you haven't
-left anything out. You can use all the power of Perl to include data and
-whatever else. And you get a guarantee that the XML produced is valid.
+left anything out. You can use all the power of Perl to generate and include
+data without having to pepper your code with interpolated strings or
+concatenation operators. And you get a guarantee that the XML produced is
+valid.
 
-That's a lousy description though, so lets talk a bit about what I'm really
-trying to achieve here.
+=head1 BASIC OPERATION
 
-Lots of Perl modules exist for interfacing with XML-based protocols (eg web
-services), and they usually work great. The problem for me is that I have a
-lot of ad-hoc XML services and document formats that I need to interface with.
-Since they're mostly in-house or vendor-specific, they rarely have a Perl
-module available, so I'm left either using a generic DOM-based module to
-construct my XML, which is usually fairly heavy and often requires quite a lot
-of code, or I'm left writing raw XML into strings and print statements.
-Invariably I fall on the latter, but then its quite common for me to make lots
-of coding mistakes in my XML, which take a while to debug.
+If you C<use> (or C<import>) XML::Spice without any arguments, it will export
+a single function C<x()> into your package. This is the only real function in
+XML::Spice, and its used to implement everything else.
 
-I started to consider how I might get Perl to validate my XML for me, and
-after reading some other code (including L<CGI> and L<stan nuevo>) it occured
-to me that a simple function-per-tag arrangement might serve well. Consider
-the L</SYNOPSIS> above. Its easy to see the strucutre and 
+C<x()> generates a single element, which in turn can contain attributes,
+character data, sub-elements (via additional calls to C<x()>), and more. The
+general format for C<x()> is:
+
+    my $xml = x("element", ...);
+
+The first argument is required, and is always the name of the element to
+generate. 
+
+
+
 
 
 =head2 x
