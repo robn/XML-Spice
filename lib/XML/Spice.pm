@@ -148,7 +148,7 @@ __END__
 
 =head1 NAME
 
-XML::Spice - makes XML generation taste great!
+XML::Spice - makes generating XML taste great!
 
 =head1 SYNOPSIS
 
@@ -168,6 +168,50 @@ XML::Spice - makes XML generation taste great!
         );
 
 =head1 DESCRIPTION
+
+XML::Spice is yet another XML generation module. It tries to take some of the
+pain out of generating XML by making it more like Perl.
+
+Unless you've got a really good module for producing XML for your particular
+use (like a module for interfacing with a specific web service), you've
+probably found that you end up resorting to code like this:
+
+    my $xml = q{<foo><bar><baz/></bar><quux/></foo>};
+
+Of course this works great, and you can't beat it for speed, but it quickly
+becomes difficult to work with. Your syntax highlighting probably just
+displays it as a giant string. You can't easily see mismatched brackets or
+other bugs until your code runs and tries to parse the thing. And, once you
+start adding attributes and character data into the mix, it rapidly moves
+towards being impossible to read.
+
+Instead of this, you could use XML::Spice and write the same thing in Perl:
+
+    my $xml = foo(bar(baz()), quux());
+
+You'll can add liberal amounts of whitespace to convey structure without it
+making your output larger. You get Perl checking to make sure that you haven't
+left anything out. You can use all the power of Perl to include data and
+whatever else. And you get a guarantee that the XML produced is valid.
+
+That's a lousy description though, so lets talk a bit about what I'm really
+trying to achieve here.
+
+Lots of Perl modules exist for interfacing with XML-based protocols (eg web
+services), and they usually work great. The problem for me is that I have a
+lot of ad-hoc XML services and document formats that I need to interface with.
+Since they're mostly in-house or vendor-specific, they rarely have a Perl
+module available, so I'm left either using a generic DOM-based module to
+construct my XML, which is usually fairly heavy and often requires quite a lot
+of code, or I'm left writing raw XML into strings and print statements.
+Invariably I fall on the latter, but then its quite common for me to make lots
+of coding mistakes in my XML, which take a while to debug.
+
+I started to consider how I might get Perl to validate my XML for me, and
+after reading some other code (including L<CGI> and L<stan nuevo>) it occured
+to me that a simple function-per-tag arrangement might serve well. Consider
+the L</SYNOPSIS> above. Its easy to see the strucutre and 
+
 
 =head2 x
 
