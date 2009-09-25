@@ -148,9 +148,24 @@ __END__
 
 =head1 NAME
 
-XML::Spice - spice things up a notch
+XML::Spice - makes XML generation taste great!
 
 =head1 SYNOPSIS
+
+    use XML::Spice qw(html head title body h1 p a);
+
+    print
+        html(
+            head(
+                title("my great page"),
+            ),
+            body(
+                h1("my great page"),
+                p("this is my great page, made with ", 
+                  a("spice", { href => "http://en.wikipedia.org/wiki/Spice/" }),
+                ),
+            ),
+        );
 
 =head1 DESCRIPTION
 
@@ -166,5 +181,5 @@ Robert Norris <rob@cataclysm.cx>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006-2008 Robert Norris. This program is free software, you can
+Copyright (C) 2006-2009 Robert Norris. This program is free software, you can
 redistribute it and/or modify it under the same terms as Perl itself.
