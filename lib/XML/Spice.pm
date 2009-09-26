@@ -229,18 +229,17 @@ produces identical results to:
 
     my $xml = x("foo", ...);
 
-C<x()> (and variants) returns an C<XML::Spice::Chunk> object, which when
-stringified (ie C<print>ed or interpolated into a string) produces the XML of
-its input. Generally you won't care, you'll just stringify it and be done with
-it. There are however some rather clever things that can be done by having the
-return value be an object instead of a normal string; see L</ADVANCED USAGE>
-for details.
+C<x()> returns an C<XML::Spice::Chunk> object, which when stringified (ie
+C<print>ed or interpolated into a string) produces the XML of its input.
+Generally you won't care, you'll just stringify it and be done with it. There
+are however some rather clever things that can be done by having the return
+value be an object instead of a normal string; see L</ADVANCED USAGE> for
+details.
 
 =head1 ARGUMENTS
 
-C<x()> (or variants) can take zero or more additional arguments. These
-arguments define what else gets added to the element. What happens depends on
-what you pass.
+C<x()> can take zero or more additional arguments. These arguments define what
+else gets added to the element. What happens depends on what you pass.
 
 =over
 
@@ -260,7 +259,7 @@ value from the last hash passed being used in the case of a conflict.
 =item sub-elements
 
 Sub-elements are included in an element by passing the output from another
-call to C<x()> (or variants), eg:
+call to C<x()>, eg:
 
     foo(bar());
 
@@ -288,8 +287,8 @@ produces:
 
     <p>Visit my <a href='http://homepage.com/'>homepage</a> for more information.</p>
 
-Other things can be passed to C<x()> (or variants); those are described in
-L</ADVANCED USAGE>.
+Other things can be passed to C<x()>; those are described in L</ADVANCED
+USAGE>.
 
 =head1 ADVANCED USAGE
 
