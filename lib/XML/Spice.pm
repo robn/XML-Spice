@@ -292,11 +292,13 @@ USAGE>.
 
 =head1 ADVANCED USAGE
 
-Advanced usages of C<XML::Spice> mostly centre around the fact that the
-C<XML::Spice::Chunk> objects returned by C<x()> do nothing until the object is
-stringified to produce XML output. This makes it possible to pass code
-references or even other objects to C<x()> and have them dynamically generate
-data to be included in the produced XML.
+=head2 Dynamic tree generation
+
+The most important thing to understand about the C<XML::Spice::Chunk> objects
+returned by C<x()> is that they do nothing until they are stringified to
+produce XML output. This makes it possible to pass code references or even
+other objects to C<x()> and have them dynamically generate data to be included
+in the produced XML.
 
 =over
 
