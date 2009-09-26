@@ -384,12 +384,14 @@ and produces:
 
 =back
 
-
-
-
 =head1 BUGS AND LIMITATIONS
 
-=head1 DEPENDENCIES
+This module guarantees that the XML it produces will be valid and semantically
+equivalent to the input you give it, but it makes no guarantees and gives no
+control over things like use of entity encoding vs. CDATA sections,
+declaration of namespaces and use of prefixes, and so forth. The method used
+may change between releases, producing different results. If you require exact
+control over the details of the XML produced, then this module is not for you.
 
 =head1 AUTHOR
 
