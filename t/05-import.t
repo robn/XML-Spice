@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 9;
+use Test::More tests => 5;
 
 
 # deliberately don't import
@@ -29,14 +29,3 @@ main::ok(__PACKAGE__->can("foo"), "foo() should be imported");
 main::ok(__PACKAGE__->can("bar"), "bar() should be imported");
 main::ok(__PACKAGE__->can("baz"), "baz() should be imported");
 main::ok(!__PACKAGE__->can("x"), "x() should not be imported when tags are explicitly asked for");
-
-
-# create some generators with alternate names
-package alternates;
-
-import XML::Spice qw(foo=bar baz=quux);
-
-main::ok(__PACKAGE__->can("foo"), "foo() should be imported");
-main::ok(!__PACKAGE__->can("bar"), "bar() should not be imported");
-main::ok(__PACKAGE__->can("foo"), "baz() should be imported");
-main::ok(!__PACKAGE__->can("quux"), "quux() should not be imported");

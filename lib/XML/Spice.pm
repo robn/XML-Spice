@@ -12,36 +12,18 @@ sub import {
 
     my $them = caller();
 
-    my $want_x = 1;
-
-    for my $arg (@args) {
-        my ($name, $tag);
-
-        if ($arg =~ m/^(\w+)$/) {
-            $name = $1;
-            $tag = $name;
-        }
-
-        elsif ($arg =~ m/^(\w+)=(\w+)$/) {
-            $name = $1;
-            $tag = $2;
-        }
-
-        else {
-            croak qq{Unknown option "$arg"};
-        }
-
-        if ($name && $tag) {
-            $want_x = 0;
+    if (@args) {
+        for my $arg (@args) {
+            croak "Invalid element name '$arg'" if $arg !~ m/^[A-Za-z]\w*$/;
 
             {
                 no strict "refs";
-                *{$them."::".$name} = sub { x($tag, @_) };
+                *{$them."::".$arg} = sub { x($arg, @_) };
             }
         }
     }
 
-    if ($want_x) {
+    else {
         no strict "refs";
         *{$them."::x"} = \&x;
     }
