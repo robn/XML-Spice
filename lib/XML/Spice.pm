@@ -288,9 +288,101 @@ produces:
 
     <p>Visit my <a href='http://homepage.com/'>homepage</a> for more information.</p>
 
-Other things can be passed to C<x()> (or variants); those are described in L</ADVANCED USAGE>.
+Other things can be passed to C<x()> (or variants); those are described in
+L</ADVANCED USAGE>.
 
 =head1 ADVANCED USAGE
+
+Advanced usages of C<XML::Spice> mostly centre around the fact that the
+C<XML::Spice::Chunk> objects returned by C<x()> do nothing until the object is
+stringified to produce XML output. This makes it possible to pass code
+references or even other objects to C<x()> and have them dynamically generate
+data to be included in the produced XML.
+
+=over
+
+=item code references
+
+If a code reference is passed to C<x()>, it is called when the resultant
+C<XML::Spice::Chunk> is stringified and its output is included at the position
+that the code reference was at, eg:
+
+    p("the time is ", sub { scalar localtime });
+
+would produce something like:
+
+    <p>the time is Sat Sep 26 22:32:57 2009</p>
+
+C<XML::Spice::Chunk> will recursively evaluate the result from the code
+reference until it gets down to basic strings and hash references as described
+in L</BASIC USAGE>. This is great for producing lists of things, eg:
+
+    my $list = ul(sub {
+        my @results;
+        opendir my $dir, "images";
+        push @results, li($_) for grep { m/\.png$/ } readdir $dir;
+        closedir $dir;
+        return @results;
+    });
+
+When C<$list> is stringified, the sub will be called and would return a list
+of C<XML::Spice::Chunk> objects. These in turn will be stringified until
+eventually only strings are left and output like the following is produced:
+
+    <ul><li>foo.png</li><li>bar.png</li><li>baz.png</li></ul>
+
+Had the sub itself returned a code reference, then that in turn would have
+been called and its output used.
+
+The code reference is called every time the C<XML::Spice::Chunk> object is
+stringified. If the computed result will not change, consider caching the
+result.
+
+=item objects
+
+You can pass an arbitrary object to C<x()>. C<XML::Spice::Chunk> will call its
+C<xml_spice()> method if it exists and include its output as described above
+for code references. If the object does not have a C<xml_spice()> method, it
+will be stringified as normal and the result included in the XML as character
+data.
+
+=back
+
+To support these, the following things may be passed to C<x()> (and thus
+returned by code references or objects):
+
+=over
+
+=item undef
+
+If C<undef> is passed to C<x()>, it is ignored. That is:
+
+    foo("bar", undef, "baz");
+
+is exactly equivalent to:
+
+    foo("bar", "baz");
+
+and produces:
+
+    <foo>barbaz</foo>
+
+=item array reference
+
+If an array reference is passed to C<x()>, it is flattened. That is:
+
+    foo("bar", [ baz(), "quux" ]);
+
+is exactly equivalent to:
+
+    foo("bar", baz(), "quux");
+
+and produces:
+
+    <foo>bar<baz />quux</foo>
+
+=back
+
 
 
 
