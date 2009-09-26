@@ -198,7 +198,7 @@ data without having to pepper your code with interpolated strings or
 concatenation operators. And you get a guarantee that the XML produced is
 valid.
 
-=head1 BASIC OPERATION
+=head1 BASIC USAGE
 
 If you C<use> (or C<import>) XML::Spice without any arguments, it will export
 a single function C<x()> into your package. This is the only real function in
@@ -211,7 +211,55 @@ general format for C<x()> is:
     my $xml = x("element", ...);
 
 The first argument is required, and is always the name of the element to
-generate. 
+generate. So C<x("foo")> produces C<E<lt>foo/E<gt>>.
+
+Generally though, you'll want to use the more readable named functions to do
+the work. You get these by providing arguments to XML::Spice when you C<use>
+it (or call C<import>). For example:
+
+    use XML::Spice qw(foo bar baz);
+
+This will export three functions into your package, C<foo()>, C<bar()> and
+C<baz()>, and I<won't> import C<x()>. Calling these functions produces the
+same results as calling C<x()> with the name as the first argument, that is:
+
+    my $xml = foo(...);
+
+produces identical results to:
+
+    my $xml = x("foo", ...);
+
+C<x()> (and variants) returns an C<XML::Spice::Chunk> object, which when
+stringified (ie C<print>ed or interpolated into a string) produces the XML of
+its input. Generally you won't care, you'll just stringify it and be done with
+it. There are however some rather clever things that can be done by having the
+return be an object instead of a normal string; see L</ADVANCED USAGE> for
+details.
+
+=head1 ARGUMENTS
+
+C<x()> or the named functions can take zero or more additional arguments.
+These arguments define what else gets added to the element. What happens
+depends on what you pass.
+
+=over
+
+=item attributes
+
+Attributes are added to the element by passing a hash reference, eg:
+
+    my $img = x("img", { src => "hello.jpg" });
+
+produces:
+
+    <img src='hello.jpg' />
+
+=item character data
+
+hashref - attributes
+string  - cdata
+
+
 
 
 
