@@ -282,10 +282,6 @@ produce XML output. This makes it possible to pass code references or even
 other objects to C<x()> and have them dynamically generate data to be included
 in the produced XML.
 
-=over
-
-=item code references
-
 If a code reference is passed to C<x()>, it is called when the resultant
 C<XML::Spice::Chunk> is stringified and its output is included at the position
 that the code reference was at, eg:
@@ -321,17 +317,7 @@ The code reference is called every time the C<XML::Spice::Chunk> object is
 stringified. If the computed result will not change, consider caching the
 result.
 
-=item objects
-
-You can pass an arbitrary object to C<x()>. C<XML::Spice::Chunk> will call its
-C<xml_spice()> method if it exists and include its output as described above
-for code references. If the object does not have a C<xml_spice()> method, it
-will be stringified as normal and the result included in the XML as character
-data.
-
-=back
-
-To support these, the following things may be passed to C<x()> (and thus
+To support this, the following things may be passed to C<x()> (and thus
 returned by code references or objects):
 
 =over
