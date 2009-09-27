@@ -105,6 +105,7 @@ sub _xml {
 
         if(ref $sub eq "CODE") {
             $sub = &{$sub};
+            redo;
         }
 
         if(ref $sub eq "XML::Spice::Chunk") {
