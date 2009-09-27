@@ -381,6 +381,14 @@ and produces:
 
 =back
 
+=head2 Result cache
+
+A chunk is only evaluated the first time it is stringified. The result is
+cached and each subsequent stringification will return the cached result. If
+you wanted to reuse a chunk (eg if it has a coderef in it that does a database
+lookup), you can call its C<dirty()> method to remove the cached result. The
+next time it is stringified it will be reevaluated from scratch.
+
 =head1 BUGS AND LIMITATIONS
 
 This module guarantees that the XML it produces will be valid and semantically
