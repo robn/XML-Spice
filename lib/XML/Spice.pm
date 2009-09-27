@@ -108,16 +108,16 @@ sub _xml {
         for my $thing (@things) {
             next if ! defined $thing;
 
-            if(ref $thing eq "CODE") {
+            if (ref $thing eq "CODE") {
                 $thing = &{$thing};
                 redo;
             }
 
-            if(ref $thing eq "ARRAY") {
+            if (ref $thing eq "ARRAY") {
                 $xml .= _serialise(@$thing);
             }
 
-            elsif(ref $thing eq "XML::Spice::Chunk") {
+            elsif (ref $thing eq "XML::Spice::Chunk") {
                 $xml .= $thing->_xml;
             }
 
