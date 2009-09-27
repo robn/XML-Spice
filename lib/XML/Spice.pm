@@ -78,26 +78,11 @@ sub _xml {
         return $chunk->{cached};
     }
 
-    my $xml = "<" . $chunk->{tag};
-
     sub _escape_attr {
         my ($val) = @_;
         $val =~ s/'/&apos;/g;
         return $val;
     }
-        
-
-    for my $attr (keys %{$chunk->{attrs}}) {
-        $xml .= " $attr='" . _escape_attr($chunk->{attrs}->{$attr}) . "'";
-    }
-    
-    if (!exists $chunk->{sub}) {
-        $xml .= "/>";
-        $chunk->{cached} = $xml;
-        return $xml;
-    }
-
-    $xml .= ">";
 
     sub _escape_cdata {
         my ($val) = @_;
@@ -137,8 +122,20 @@ sub _xml {
         return $xml;
     }
 
-    $xml .= _serialise(@{$chunk->{sub}});
+    my $xml = "<" . $chunk->{tag};
 
+    for my $attr (keys %{$chunk->{attrs}}) {
+        $xml .= " $attr='" . _escape_attr($chunk->{attrs}->{$attr}) . "'";
+    }
+    
+    if (!exists $chunk->{sub}) {
+        $xml .= "/>";
+        $chunk->{cached} = $xml;
+        return $xml;
+    }
+
+    $xml .= ">";
+    $xml .= _serialise(@{$chunk->{sub}});
     $xml .= "</" . $chunk->{tag} . ">";
 
     $chunk->{cached} = $xml;
