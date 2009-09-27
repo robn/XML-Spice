@@ -100,23 +100,37 @@ sub _xml {
         return $val;
     }
 
-    for my $sub (@{$chunk->{sub}}) {
-        next if ! defined $sub;
+    sub _serialise {
+        my @things = @_;
 
-        if(ref $sub eq "CODE") {
-            $sub = &{$sub};
-            redo;
+        my $xml = '';
+
+        for my $thing (@things) {
+            next if ! defined $thing;
+
+            if(ref $thing eq "CODE") {
+                $thing = &{$thing};
+                redo;
+            }
+
+            if(ref $thing eq "ARRAY") {
+                $xml .= _serialise(@$thing);
+            }
+
+            elsif(ref $thing eq "XML::Spice::Chunk") {
+                $xml .= $thing->_xml;
+            }
+
+            else {
+                next if $thing eq "";
+                $xml .= _escape_cdata($thing);
+            }
         }
 
-        if(ref $sub eq "XML::Spice::Chunk") {
-            $xml .= $sub->_xml;
-        }
-
-        else {
-            next if $sub eq "";
-            $xml .= _escape_cdata($sub);
-        }
+        return $xml;
     }
+
+    $xml .= _serialise(@{$chunk->{sub}});
 
     $xml .= "</" . $chunk->{tag} . ">";
 
