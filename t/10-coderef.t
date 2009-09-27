@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 use Test::XML;
 use XML::Spice;
 
@@ -33,3 +33,8 @@ is_xml(
     qq(<deep><deeper/></deep>),
     x("deep", sub { return \&deeper; }),
     "nested coderefs");
+
+is_xml(
+    qq(<foo bar='baz'>),
+    x("foo", sub { return { "bar" => "baz" }}),
+    "coderefs can return attribute hashes");
