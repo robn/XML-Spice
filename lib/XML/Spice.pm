@@ -93,7 +93,7 @@ sub _xml {
     }
 
     sub _serialise {
-        my @things = @_;
+        my ($chunk, @things) = @_;
 
         my $xml = '';
 
@@ -102,11 +102,23 @@ sub _xml {
 
             if (ref $thing eq "CODE") {
                 $thing = &{$thing};
+
+                if (ref $thing eq "HASH") {
+                    for my $key (keys %$thing) {
+                        if (!defined $thing->{$key}) {
+                            delete $chunk->{attrs}->{$key};
+                        } else {
+                            $chunk->{attrs}->{$key} = "".$thing->{$key};
+                        }
+                    }
+                    undef $thing;
+                }
+
                 redo;
             }
 
             if (ref $thing eq "ARRAY") {
-                $xml .= _serialise(@$thing);
+                $xml .= $chunk->_serialise(@$thing);
             }
 
             elsif (ref $thing eq "XML::Spice::Chunk") {
@@ -122,21 +134,21 @@ sub _xml {
         return $xml;
     }
 
+    my $subxml = $chunk->_serialise(@{$chunk->{sub}}) if exists $chunk->{sub};
+
     my $xml = "<" . $chunk->{tag};
 
     for my $attr (keys %{$chunk->{attrs}}) {
         $xml .= " $attr='" . _escape_attr($chunk->{attrs}->{$attr}) . "'";
     }
     
-    if (!exists $chunk->{sub}) {
+    if (!$subxml) {
         $xml .= "/>";
         $chunk->{cached} = $xml;
         return $xml;
     }
 
-    $xml .= ">";
-    $xml .= _serialise(@{$chunk->{sub}});
-    $xml .= "</" . $chunk->{tag} . ">";
+    $xml .= ">" . $subxml . "</" . $chunk->{tag} . ">";
 
     $chunk->{cached} = $xml;
     return $xml;

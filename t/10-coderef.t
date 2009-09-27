@@ -35,6 +35,6 @@ is_xml(
     "nested coderefs");
 
 is_xml(
-    qq(<foo bar='baz'>),
+    qq(<foo bar='baz'/>),
     x("foo", sub { return { "bar" => "baz" }}),
     "coderefs can return attribute hashes");
