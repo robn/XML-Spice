@@ -33,12 +33,19 @@ sub x {
     my ($tag, @args) = @_;
 
     my $chunk = {
-        tag => $tag,
+        tag   => $tag,
+        attrs => {},
     };
     
     for my $arg (@args) {
         if (ref $arg eq "HASH") {
-            $chunk->{attrs} = $arg;
+            for my $key (keys %$arg) {
+                if (!defined $arg->{$key}) {
+                    delete $chunk->{attrs}->{$key};
+                } else {
+                    $chunk->{attrs}->{$key} = "".$arg->{$key};
+                }
+            }
         }
 
         else {
