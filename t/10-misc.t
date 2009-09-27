@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 5;
+use Test::More tests => 8;
 use Test::XML;
 use XML::Spice;
 
@@ -26,3 +26,25 @@ is_xml(x("foo", { "bar" => "baz" }, { "what" => undef }),
 is_xml(x("foo", { "bar" => "baz" }, { "bar" => undef }),
        x("foo"),
        "or cause a previously-supplied attribute to be removed");
+
+
+my $count = 0;
+sub inc {
+    return $count++;
+}
+my $xml = x("foo", \&inc);
+my $x0 = "".$xml;
+
+is_xml(q(<foo>0</foo>),
+       $xml,
+       "return is cached after initial stringification");
+is_xml(q(<foo>0</foo>),
+       $xml,
+       "and continues to be");
+
+$xml->dirty;
+
+is_xml(q(<foo>1</foo>),
+       $xml,
+       "but gets re-evaluated after setting it dirty again");
+       

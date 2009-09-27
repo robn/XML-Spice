@@ -69,14 +69,7 @@ use overload
 sub _xml {
     my ($chunk) = @_;
 
-    if (exists $chunk->{dirty}) {
-        delete $chunk->{cached};
-        delete $chunk->{dirty};
-    }
-    
-    elsif (exists $chunk->{cached}) {
-        return $chunk->{cached};
-    }
+    return $chunk->{cached} if exists $chunk->{cached};
 
     sub _escape_attr {
         my ($val) = @_;
@@ -154,6 +147,11 @@ sub _xml {
     return $xml;
 }
 
+sub dirty {
+    my ($chunk) = @_;
+
+    delete $chunk->{cached};
+}
 
 1;
 
