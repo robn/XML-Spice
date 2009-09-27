@@ -375,11 +375,29 @@ declaration of namespaces and use of prefixes, and so forth. The method used
 may change between releases, producing different results. If you require exact
 control over the details of the XML produced, then this module is not for you.
 
+=head2 REPORTING BUGS
+
+Please report bugs via the CPAN Request Tracker at
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Spice>
+
+=head1 FEEDBACK
+
+If you find this module useful, please consider rating it on the CPAN Ratings
+service at L<http://cpanratings.perl.org/rate?distribution=XML-Spice>.
+
+If you like (or hate) this module, please tell the author! Send mail to
+E<lt>rob@cataclysm.cxE<gt>.
+
 =head1 AUTHOR
 
-Robert Norris <rob@cataclysm.cx>
+Copyright 2006-2009 Robert Norris E<lt>rob@cataclysm.cxE<gt>.
 
-=head1 COPYRIGHT AND LICENSE
+=head1 LICENSE
 
-Copyright (C) 2006-2009 Robert Norris. This program is free software, you can
-redistribute it and/or modify it under the same terms as Perl itself.
+This module is free software, you can redistribute it and/or modify it under
+the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+I<Stan - The Nevow Document Object Model> at
+L<http://www.kieranholland.com/code/documentation/nevow-stan/>
