@@ -396,8 +396,3 @@ Copyright 2006-2009 Robert Norris E<lt>rob@cataclysm.cxE<gt>.
 
 This module is free software, you can redistribute it and/or modify it under
 the same terms as Perl itself.
-
-=head1 SEE ALSO
-
-I<Stan - The Nevow Document Object Model> at
-L<http://www.kieranholland.com/code/documentation/nevow-stan/>
