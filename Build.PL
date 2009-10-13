@@ -15,7 +15,7 @@ my $builder = Module::Build->new(
         'Test::XML' => 0,
     },
     add_to_cleanup      => [ 'XML-Spice-*' ],
-    create_mailfile_pl  => 'traditional'
+    create_makefile_pl  => 'traditional'
 );
 
 $builder->create_build_script();
