@@ -1,5 +1,7 @@
 package XML::Spice;
 
+require 5.008;
+
 use warnings;
 use strict;
 
