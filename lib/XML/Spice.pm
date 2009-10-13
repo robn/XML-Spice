@@ -163,7 +163,7 @@ __END__
 
 =head1 NAME
 
-XML::Spice - makes generating XML taste great!
+XML::Spice - generating XML has never been so Perly!
 
 =head1 SYNOPSIS
 
