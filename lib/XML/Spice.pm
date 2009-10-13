@@ -389,6 +389,17 @@ you wanted to reuse a chunk (eg if it has a coderef in it that does a database
 lookup), you can call its C<forget()> method to remove the cached result. The
 next time it is stringified it will be reevaluated from scratch.
 
+=head1 TODO
+
+=over
+
+=item Optimised namespace declarations
+
+If two sub-chunks declare the same namespace, then move the declaration to the
+parent chunk.
+
+=back
+
 =head1 BUGS AND LIMITATIONS
 
 This module guarantees that the XML it produces will be valid and semantically
