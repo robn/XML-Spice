@@ -8,12 +8,14 @@ my $builder = Module::Build->new(
     dist_author         => 'Robert Norris <rob@cataclysm.cx>',
     dist_version_from   => 'lib/XML/Spice.pm',
     requires => {
+        'Carp' => 0,
     },
     build_requires => {
         'Test::More' => 0,
         'Test::XML' => 0,
     },
     add_to_cleanup      => [ 'XML-Spice-*' ],
+    create_mailfile_pl  => 'traditional'
 );
 
 $builder->create_build_script();
