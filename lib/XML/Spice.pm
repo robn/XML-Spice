@@ -147,7 +147,7 @@ sub _xml {
     return $xml;
 }
 
-sub dirty {
+sub forget {
     my ($chunk) = @_;
 
     delete $chunk->{cached};
@@ -386,7 +386,7 @@ and produces:
 A chunk is only evaluated the first time it is stringified. The result is
 cached and each subsequent stringification will return the cached result. If
 you wanted to reuse a chunk (eg if it has a coderef in it that does a database
-lookup), you can call its C<dirty()> method to remove the cached result. The
+lookup), you can call its C<forget()> method to remove the cached result. The
 next time it is stringified it will be reevaluated from scratch.
 
 =head1 BUGS AND LIMITATIONS

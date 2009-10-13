@@ -42,9 +42,9 @@ is_xml(q(<foo>0</foo>),
        $xml,
        "and continues to be");
 
-$xml->dirty;
+$xml->forget;
 
 is_xml(q(<foo>1</foo>),
        $xml,
-       "but gets re-evaluated after setting it dirty again");
+       "but gets re-evaluated after forgetting the cached value");
        
