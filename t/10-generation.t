@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 14;
+use Test::More tests => 15;
 use Test::XML;
 use XML::Spice;
 
@@ -110,9 +110,15 @@ my @tests = (
         },
     
     "escaping",
-    qq(<escapes>&amp;&lt;&gt;</escapes>),
+    qq(<escapes>&amp;&lt;&gt;&quot;</escapes>),
         sub {
-            x("escapes", "&<>");
+            x("escapes", '&<>"');
+        },
+
+    "numeric escaping",
+    qq(<escapes>).join('', (map { sprintf '&#%d;', $_ } (0x20 .. 0xd7ff))).qq(</escapes>),
+        sub {
+            x("escapes",  join '', (map { chr($_) } (0x20 .. 0xd7ff)));
         },
 );
 

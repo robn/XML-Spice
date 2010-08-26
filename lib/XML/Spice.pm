@@ -84,6 +84,8 @@ sub _xml {
         $val =~ s/&/&amp;/g;
         $val =~ s/</&lt;/g;
         $val =~ s/>/&gt;/g;
+        $val =~ s/"/&quot;/g;
+        $val =~ s/([^\x20-\x7E])/'&#' . ord($1) . ';'/ge;
         return $val;
     }
 
