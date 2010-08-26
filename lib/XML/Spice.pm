@@ -428,7 +428,7 @@ E<lt>rob@cataclysm.cxE<gt>.
 
 =head1 AUTHOR
 
-Copyright 2006-2009 Robert Norris E<lt>rob@cataclysm.cxE<gt>.
+Copyright 2006-2010 Robert Norris E<lt>rob@eatenbyagrue.org<gt>.
 
 =head1 LICENSE
 
