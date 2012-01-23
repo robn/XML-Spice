@@ -424,11 +424,11 @@ If you find this module useful, please consider rating it on the CPAN Ratings
 service at L<http://cpanratings.perl.org/rate?distribution=XML-Spice>.
 
 If you like (or hate) this module, please tell the author! Send mail to
-E<lt>rob@cataclysm.cxE<gt>.
+E<lt>rob@eatenbyagrue.org<gt>.
 
 =head1 AUTHOR
 
-Copyright 2006-2010 Robert Norris E<lt>rob@eatenbyagrue.org<gt>.
+Copyright 2006-2010 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
 
 =head1 LICENSE
 
