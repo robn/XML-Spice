@@ -38,7 +38,7 @@ sub x {
         tag   => $tag,
         attrs => {},
     };
-    
+
     for my $arg (@args) {
         if (ref $arg eq "HASH") {
             for my $key (keys %$arg) {
@@ -138,8 +138,8 @@ sub _xml {
     for my $attr (keys %{$chunk->{attrs}}) {
         $xml .= " $attr='" . _escape_attr($chunk->{attrs}->{$attr}) . "'";
     }
-    
-    if (!$subxml) {
+
+    if (!defined $subxml) {
         $xml .= "/>";
         $chunk->{cached} = $xml;
         return $xml;
