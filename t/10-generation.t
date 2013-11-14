@@ -3,7 +3,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 15;
+use Test::More tests => 16;
 use Test::XML;
 use XML::Spice;
 
@@ -119,6 +119,12 @@ my @tests = (
     qq(<escapes>).join('', (map { sprintf '&#%d;', $_ } (0x20 .. 0xd7ff))).qq(</escapes>),
         sub {
             x("escapes",  join '', (map { chr($_) } (0x20 .. 0xd7ff)));
+        },
+
+    "0 as cdata works",
+    qq(<foo>0</foo>),
+        sub {
+            x("foo", 0);
         },
 );
 
