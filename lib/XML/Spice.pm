@@ -7,8 +7,6 @@ use strict;
 
 use Carp;
 
-our $VERSION = "0.02";
-
 sub import {
     my ($pkg, @args) = @_;
 
@@ -428,7 +426,7 @@ E<lt>rob@eatenbyagrue.org<gt>.
 
 =head1 AUTHOR
 
-Copyright 2006-2010 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
+Copyright 2006-2013 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
 
 =head1 LICENSE
 
