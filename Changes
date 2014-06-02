@@ -1,12 +1,11 @@
 {{$NEXT}}
+          Add pretty-printing option for debugging
 
 0.03      Nov 14 2013
+          Handle "false" serialised values correctly
 
-0.01    2009-10-13
-        First release
+0.02      Aug 26 2010
+          Escape numerics
 
-0.02    2010-08-26
-        Escape numerics
-
-0.03    2013-11-14
-        Handle "false" serialised values correctly
+0.01      Oct 13 2009
+          First release

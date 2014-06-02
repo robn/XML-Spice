@@ -7,6 +7,8 @@ use strict;
 
 use Carp;
 
+our $PRETTY_PRINT = 0;
+
 sub import {
     my ($pkg, @args) = @_;
 
@@ -63,13 +65,30 @@ package # hide from PAUSE
 use warnings;
 use strict;
 
+use Carp;
+
 use overload
     '""' => \&_xml;
+
+my $TIDY_LOADED;
 
 sub _xml {
     my ($chunk) = @_;
 
-    return $chunk->{cached} if exists $chunk->{cached};
+    if ($PRETTY_PRINT && !defined $TIDY_LOADED) {
+        eval { require XML::Tidy::Tiny };
+        if ($@) {
+            carp "Couldn't load XML::Tidy::Tiny: $@";
+            $TIDY_LOADED = 0;
+        }
+        else {
+            $TIDY_LOADED = 1;
+        }
+    }
+
+    my $WANT_PRETTY = $PRETTY_PRINT && $TIDY_LOADED;
+
+    return $chunk->{cached} if exists $chunk->{cached} && !$WANT_PRETTY;
 
     sub _escape_attr {
         my ($val) = @_;
@@ -139,14 +158,14 @@ sub _xml {
 
     if (!defined $subxml) {
         $xml .= "/>";
-        $chunk->{cached} = $xml;
-        return $xml;
+        $chunk->{cached} = $xml unless $WANT_PRETTY;
+        return $WANT_PRETTY ? XML::Tidy::Tiny::xml_tidy($xml) : $xml;
     }
 
     $xml .= ">" . $subxml . "</" . $chunk->{tag} . ">";
 
-    $chunk->{cached} = $xml;
-    return $xml;
+    $chunk->{cached} = $xml unless $WANT_PRETTY;
+    return $WANT_PRETTY ? XML::Tidy::Tiny::xml_tidy($xml) : $xml;
 }
 
 sub forget {
@@ -390,6 +409,16 @@ cached and each subsequent stringification will return the cached result. If
 you wanted to reuse a chunk (eg if it has a coderef in it that does a database
 lookup), you can call its C<forget()> method to remove the cached result. The
 next time it is stringified it will be reevaluated from scratch.
+
+=head1 PRETTY PRINTING
+
+C<XML::Spice> can produce pretty-printed output. Because the additional
+whitespace subtly changes the semantics of the generated XML this is only
+intended as a debugging feature. This also disables the result cache.
+
+To use it, you'll need the L<XML::Tidy::Tiny> module installed. Then to enable
+it, set (and localise!) C<$XML::Spice::PRETTY_PRINT> to a true value before
+stringifying a chunk.
 
 =head1 TODO
 
