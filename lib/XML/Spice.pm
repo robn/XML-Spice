@@ -184,6 +184,8 @@ __END__
 
 =encoding UTF-8
 
+=for markdown [![Build Status](https://secure.travis-ci.org/robn/XML-Spice.png)](http://travis-ci.org/robn/XML-Spice)
+
 =head1 NAME
 
 XML::Spice - generating XML has never been so Perly!
