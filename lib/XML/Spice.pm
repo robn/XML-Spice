@@ -1,5 +1,7 @@
 package XML::Spice;
 
+# ABSTRACT: generating XML has never been so Perly!
+
 require 5.008;
 
 use warnings;
@@ -179,6 +181,8 @@ sub forget {
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -440,22 +444,26 @@ declaration of namespaces and use of prefixes, and so forth. The method used
 may change between releases, producing different results. If you require exact
 control over the details of the XML produced, then this module is not for you.
 
-=head2 REPORTING BUGS
+=head1 SUPPORT
 
-Please report bugs via the CPAN Request Tracker at
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=XML-Spice>
+=head2 Bugs / Feature Requests
 
-=head1 FEEDBACK
+Please report any bugs or feature requests through the issue tracker
+at L<https://github.com/robn/XML-Spice/issues>.
+You will be notified automatically of any progress on your issue.
 
-If you find this module useful, please consider rating it on the CPAN Ratings
-service at L<http://cpanratings.perl.org/rate?distribution=XML-Spice>.
+=head2 Source Code
 
-If you like (or hate) this module, please tell the author! Send mail to
-E<lt>rob@eatenbyagrue.org<gt>.
+This is open source software. The code repository is available for
+public review and contribution under the terms of the license.
+
+L<https://github.com/robn/XML-Spice>
+
+  git clone https://github.com/robn/XML-Spice.git
 
 =head1 AUTHOR
 
-Copyright 2006-2013 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
+Copyright 2006-2015 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
 
 =head1 LICENSE
 
