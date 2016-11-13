@@ -463,11 +463,21 @@ L<https://github.com/robn/XML-Spice>
 
   git clone https://github.com/robn/XML-Spice.git
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Copyright 2006-2015 Robert Norris E<lt>rob@eatenbyagrue.orgE<gt>.
+=over 4
 
-=head1 LICENSE
+=item *
 
-This module is free software, you can redistribute it and/or modify it under
-the same terms as Perl itself.
+Robert Norris <rob@eatenbyagrue.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2006-2016 by Robert Norris.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
